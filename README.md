@@ -123,6 +123,31 @@ SELECT order_priority, ship_mode, COUNT(*) AS total_orders, SUM(shipping_cost) A
 FROM KMS_Store
 GROUP BY order_priority, ship_mode
 ORDER BY order_priority, ship_mode desc
-
 ```
+## Result and finding
+The Analysis results are sumarised as follow:
+- The Furniture category had the highest sales.
+- The East region had the lowest sales.
+- Corporate clients generated the highest sales volume.
+- Delivery truck incurred the most shipping cost.
 
+## Recommendations
+1. Focus more marketing on Furniture and Appliances
+2. Re-engage low-spending customers via loyalty incentives
+3. Align shipping method with order priority to cut costs
+4. Investigate and resolve high return rates in specific categories
+5. Offer exclusive deals to high-value customers (especially corporate)
+6. Regional marketing efforts should be focused on improving sales in the bottom regions through localized promotions or outreach.
+7. Profitable customers should be prioritized for early product launches and reward programs.
+
+## Conclusion
+This analysis of Kultra Mega Stores’ (KMS) order data from 2009 to 2012 has provided 
+valuable insights into product performance, regional sales trends, customer behavior, 
+and operational efficiency. By leveraging SQL queries and structured exploration, 
+we identified key areas of strength—such as high-performing product categories 
+(e.g., Furniture), loyal corporate customers, and high sales regions (West, Central, Ontario).
+We also uncovered inefficiencies, such as misaligned shipping costs and order priorities, 
+underperforming regions, and customers with low engagement. In particular, 
+the use of Express Air for low-priority orders represents a significant cost-saving
+opportunity. Additionally, identifying the most profitable and loyal customers presents 
+an opportunity to implement targeted marketing and retention strategies.
