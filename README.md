@@ -129,7 +129,7 @@ The Analysis results are sumarised as follow:
 - The Furniture category had the highest sales.
 - The East region had the lowest sales.
 - Corporate clients generated the highest sales volume.
-- Delivery truck incurred the most shipping cost.
+- Regular Air incurred the most shipping cost.
 
 ## Recommendations
 1. Focus more marketing on Furniture and Appliances
