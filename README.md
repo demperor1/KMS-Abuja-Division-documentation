@@ -35,10 +35,15 @@ Data Analysis
 This involved writing code used in analysis:
 
 ```SQL
+create database KMS
+
 select * from KMS_store
 
+alter table KMS_Store
+alter column profit decimal (10,2)
+
 -----Highest sale by product category
-select product_category, sum(sales) as highestsales 
+select top 1 product_category, sum(sales) as highestsales 
 from KMS_store
 group by product_category
 order by highestsales desc
@@ -61,17 +66,27 @@ from KMS_store
 group by Region
 order by last3sales asc
 
+select * from KMS_store
+
 ---total sales in Ontario
 select Region, sum(sales) as totalsale
 from KMS_Store
 where region = 'Ontario'
 group by region
 
------shipping mode
-select Ship_mode, sum(Shipping_cost) as cost
+---total sale by 10 bottom customer
+select top 10 customer_name, sum(sales) as revenue 
+from KMS_Store
+group by customer_name
+order by revenue asc
+
+-----total shipping cost
+select Ship_mode, sum(Shipping_cost) as total_cost
 from KMS_Store
 group by ship_mode
-order by cost desc
+order by total_cost desc
+
+select * from KMS_store
 
 ----valuable or Top 1 customer by sales
 SELECT TOP 1 customer_name, product_category, SUM(sales) AS total_sales
@@ -112,17 +127,31 @@ from KMS_store
 where customer_segment = 'corporate'
 group by customer_name, customer_segment
 
+
+select * from KMS_store
+
 ---- highest profitable by consumer customer
 select top 1 customer_name, customer_segment, sum(profit) as highestprofit
 from KMS_store
 where customer_segment = 'consumer'
 group by customer_name, customer_segment
 
----shipping priority
-SELECT order_priority, ship_mode, COUNT(*) AS total_orders, SUM(shipping_cost) AS total_shipping_cost
-FROM KMS_Store
-GROUP BY order_priority, ship_mode
-ORDER BY order_priority, ship_mode desc
+
+---order of priority
+select order_priority, ship_mode, count(order_id) as total_order,
+round(sum(sales - profit),2) as estimated_shipping_cost, 
+Avg(DATEDIFF (DAY, [order_date], [ship_date])) as Avg_shipping_days
+from KMS_store
+group by order_priority, ship_mode
+order by total_order desc
+	
+	
+	/* Analyzing the shipping modes used for different order priorities, 
+	the result showed that some low-priority orders were shipped via Express Air, 
+	which is the fastest and most expensive option and high 
+	or critical priority orders was used via Delivery Truck, the slowest and cheapest method. 
+	This suggests the company did not consistently align shipping methods with order of priority, 
+	potentially leading to unnecessary costs or delayed deliveries for important orders.*/
 ```
 ## Result and finding
 The Analysis results are sumarised as follow:
